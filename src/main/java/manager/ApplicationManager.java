@@ -9,13 +9,19 @@ public class ApplicationManager {
 
     WebDriver wd;
 HelperUser user;
+HelperCar car;
 
     public void init(){
 wd = new ChromeDriver();
 wd.manage().window().maximize();//что бы раскрыть окно браузера на весь экран
 wd.navigate().to("https://ilcarro.web.app/");
 user = new HelperUser(wd);
+car = new HelperCar(wd);
 
+    }
+
+    public HelperCar getCar() {
+        return car;
     }
 
     public HelperUser getUser() {
