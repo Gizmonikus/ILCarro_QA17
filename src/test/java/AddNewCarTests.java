@@ -15,16 +15,14 @@ public class AddNewCarTests extends TestBase {
                             .withEmail("bobinsan20@yandex.ru")
                             .withPassword("Bob12345@")
                     );
-            app.getUser().pause(3);
+            app.getUser().pause(3000);
             app.getUser().clickOkButton();
         }
     }
 
-
     @Test
-
     public void addNewCarPositive() {
-        int i = (int) ((System.currentTimeMillis() / 1000) % 3600);//генератор случайных чисел
+        int i = (int) ((System.currentTimeMillis() / 1000) % 3600);// генератор случайных чисел
 
         Car car = Car.builder()
                 .address("Tel Aviv")
@@ -38,16 +36,17 @@ public class AddNewCarTests extends TestBase {
                 .price("150")
                 .build();
 
+        app.getUser().pause(3000);
         app.getCar().openCarForm();
-        Assert.assertTrue(app.getCar().isCarFormPresent());
-       // app.getCar().fillCarForm();
-       // app.getCar().submitCarForm();
-    }
-
-   // @AfterMethod
-    public void postCondition() {
+//        Assert.assertTrue(app.getCar().isCarFormPresent());
+        app.getUser().pause(3000);
+        app.getCar().fillCarForm(car);
+        app.getCar().submitForm();
 
     }
 
-
+//    @AfterMethod
 }
+
+
+

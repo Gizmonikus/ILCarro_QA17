@@ -18,26 +18,31 @@ public class HelperUser extends HelperBase{
     public void submitLogin(){
         click(By.xpath("//button[@type='submit']"));
     }
+
+    public void clickOkButton(){
+        click(By.xpath("//button[@type='button']"));
+
+    }
+
     public void submitRegistration(){
         click(By.xpath("//button[2]"));
-    }
-    public void clickOkButton() {
-        click(By.xpath("//button[text()='Ok']"));
     }
 
     public boolean isLogged(){
         return isElementPresent(By.xpath("//a[text()=' Logout ']"));
-
     }
 
     public boolean isLoggedSuccess(){
-        WebDriverWait wait = new WebDriverWait(wd, 5);
-        WebElement element = wd.findElement(
-                By.cssSelector(".dialog-container"));
-        wait.until(ExpectedConditions.visibilityOf(element));
-        return element.getText().contains("success");
+        WebDriverWait wait = new WebDriverWait(wd, 10);
+//        WebElement element = wd.findElement(
+//                By.cssSelector(".dialog-container"));
+//        wait.until(ExpectedConditions.visibilityOf(element));
+        wait.until(ExpectedConditions.visibilityOf(wd.findElement(
+                By.cssSelector(".dialog-container"))));
+//        System.out.println(element.getText());
+        return wd.findElement(
+                By.cssSelector(".dialog-container")).getText().contains("success");
     }
-
     public void logOut(){
         click(By.xpath("//a[text()=' Logout ']"));
     }
@@ -54,31 +59,25 @@ public class HelperUser extends HelperBase{
         type(By.xpath("//input[@id='email']"), data.getEmail());
         type(By.xpath("//input[@id='password']"), data.getPassword());
     }
-//    public void login(String email, String password){
-//        openLoginRegistrationForm();
-//        fillLoginRegistrationForm(email, password);
-//        submitLogin();
-//        pause(10);
-//    }
-
-    public void FillAddForm(String name, String lastName, String phone, String email, String addres, String description){
-        type(By.xpath("//input[@placeholder='Name']"), name);
-        type(By.xpath("//input[@placeholder='Last Name']"), lastName);
-        type(By.xpath("//input[@placeholder='Phone']"), phone);
-        type(By.xpath("//input[@placeholder='email']"), email);
-        type(By.xpath("//input[@placeholder='Address']"), addres);
-        type(By.xpath("//input[@placeholder='description']"), description);
-    }
-
 
     public void login(User user) {
-
         openLoginForm();
         fillLoginForm(user);
         submitLogin();
-        clickOkButton();
-        pause(5);
+//        clickOkButton();
+//        pause(5000);
+    }
 
+    public void openRegistrationForm() {
+        click(By.xpath("//a[text()=' Sign up ']"));
+    }
+
+    public void fillRegistrationForm(User user) {
+        type(By.id("name"), user.getName());
+        type(By.id("lastName"), user.getLastName());
+        type(By.id("email"), user.getEmail());
+        type(By.id("password"), user.getPassword());
+        click(By.cssSelector("label[for='terms-of-use']"));
     }
 }
 
