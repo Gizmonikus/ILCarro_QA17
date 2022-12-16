@@ -22,9 +22,9 @@ public class LoginTest extends TestBase {
         app.getUser().openLoginForm();
         //app.getUser().fillLoginForm("bobinsan20@yandex.ru", "Bob12345@");
         app.getUser().fillLoginForm(data);
-        app.getUser().pause(5);
+        app.getUser().pause(5000);
         app.getUser().submitLogin();
-        //Assert.assertTrue(app.getUser().isLoggedSuccess());
+        Assert.assertTrue(app.getUser().isLoggedSuccess());
     }
 
     @AfterMethod
