@@ -41,7 +41,7 @@ public class HelperUser extends HelperBase{
     }
 
     public boolean isLoggedSuccess(){
-        WebDriverWait wait = new WebDriverWait(wd, 10);
+        WebDriverWait wait = new WebDriverWait(wd, 3);
 //        WebElement element = wd.findElement(
 //                By.cssSelector(".dialog-container"));
 //        wait.until(ExpectedConditions.visibilityOf(element));
