@@ -43,9 +43,13 @@ public class HelperCar extends HelperBase{
         select(By.id("fuel"), car.getFuel());
         type(By.id("seats"), car.getSeats());
         type(By.id("class"), car.getCarClass());
-        type(By.id("serialNumber"), car.getCarRegNumber());
+       // pause(5000);
+        type(By.xpath("//input[@id='serialNumber']"), car.getCarRegNumber());
+        //pause(5000);
         type(By.id("price"), car.getPrice());
+
     }
+
 
     public void submitForm() {
         click(By.xpath("//button[@type='submit']"));

@@ -2,21 +2,31 @@
 //password Bob12345@
 
 package manager;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ApplicationManager {
 
-    WebDriver wd;
-HelperUser user;
-HelperCar car;
+    Logger logger = LoggerFactory.getLogger(ApplicationManager.class);
 
-    public void init(){
-wd = new ChromeDriver();
-//wd.manage().window().maximize();//что бы раскрыть окно браузера на весь экран
-wd.navigate().to("https://ilcarro.web.app/");
-user = new HelperUser(wd);
-car = new HelperCar(wd);
+
+    //WebDriver wd;
+    EventFiringWebDriver wd;
+    HelperUser user;
+    HelperCar car;
+
+    public void init() {
+//wd = new ChromeDriver();
+        wd = new EventFiringWebDriver(new ChromeDriver());
+        wd.register(new MyListener());
+        wd.manage().window().maximize();
+        wd.navigate().to("https://ilcarro.web.app/");
+        user = new HelperUser(wd);
+        car = new HelperCar(wd);
 
     }
 

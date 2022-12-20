@@ -22,7 +22,7 @@ public class AddNewCarTests extends TestBase {
 
     @Test
     public void addNewCarPositive() {
-        int i = (int) ((System.currentTimeMillis() / 1000) % 3600);// генератор случайных чисел
+        int i = (int) ((System.currentTimeMillis() / 1000) % 3600);//генератор случайных чисел
 
         Car car = Car.builder()
                 .address("Tel Aviv")
@@ -32,7 +32,7 @@ public class AddNewCarTests extends TestBase {
                 .fuel("Petrol")
                 .seats("4")
                 .carClass("5")
-                .carRegNumber("100-200-" + i)
+                .carRegNumber("14434"+i)
                 .price("150")
                 .build();
 
@@ -41,10 +41,10 @@ public class AddNewCarTests extends TestBase {
 //        Assert.assertTrue(app.getCar().isCarFormPresent());
         app.getUser().pause(3000);
         app.getCar().fillCarForm(car);
+        app.getUser().pause(3000);
         app.getCar().submitForm();
-
+        logger.info("Car added with: \n " + car.toString());
     }
-
 
 //    @AfterMethod
 }

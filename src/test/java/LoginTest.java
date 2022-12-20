@@ -1,4 +1,5 @@
 import models.User;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -24,13 +25,25 @@ public class LoginTest extends TestBase {
         app.getUser().fillLoginForm(data);
         app.getUser().pause(5000);
         app.getUser().submitLogin();
-        Assert.assertTrue(app.getUser().isLoggedSuccess());
+        //Assert.assertTrue(app.getUser().isLoggedSuccess());
+    }
+
+    @Test
+    public void loginNegativeMail() {
+        User data = new User()
+                .withEmail("abcd@mail.bob")
+                .withPassword("@Abcd1234");
+        app.getUser().openLoginForm();
+        app.getUser().fillLoginForm("abcd@mail.bob", "@Abcd1234");
+        app.getUser().submitLogin();
+        app.getUser().pause(3000);
+        Assert.assertTrue(app.getUser().isElementPresent(By.xpath("//h1[.='Login failed']")));
+
     }
 
     @AfterMethod
-    public void postCondition() {
+    public void postCondition(){
         app.getUser().pause(3000);
         app.getUser().clickOkButton();
     }
-
 }

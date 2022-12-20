@@ -89,6 +89,7 @@ public class HelperUser extends HelperBase{
 //        JavascriptExecutor js = (JavascriptExecutor) wd;
 //        js.executeScript("document.querySelector('#terms-of-use').click();");
         checkPolicy();
+
     }
 
     public void checkPolicy(){//3 варианта клика по чек боксу
