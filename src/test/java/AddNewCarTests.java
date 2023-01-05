@@ -36,12 +36,12 @@ public class AddNewCarTests extends TestBase {
                 .price("150")
                 .build();
 
-        app.getUser().pause(3000);
+        app.getUser().pause(5000);
         app.getCar().openCarForm();
 //        Assert.assertTrue(app.getCar().isCarFormPresent());
-        app.getUser().pause(3000);
+        app.getUser().pause(5000);
         app.getCar().fillCarForm(car);
-        app.getUser().pause(3000);
+        app.getUser().pause(5000);
         app.getCar().submitForm();
         logger.info("Car added with: \n " + car.toString());
     }
