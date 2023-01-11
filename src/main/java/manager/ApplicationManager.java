@@ -11,6 +11,8 @@ import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.concurrent.TimeUnit;
+
 public class ApplicationManager {
 
     Logger logger = LoggerFactory.getLogger(ApplicationManager.class);
@@ -20,6 +22,7 @@ String browser;
     EventFiringWebDriver wd;
     HelperUser user;
     HelperCar car;
+    HelperSearch search;
 
     public ApplicationManager(String browser) {
         this.browser = browser;
@@ -34,12 +37,18 @@ String browser;
             wd = new EventFiringWebDriver(new FirefoxDriver());
             logger.info("Tests on FireFox started");
         }
+        wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wd.register(new MyListener());
         wd.manage().window().maximize();
         wd.navigate().to("https://ilcarro.web.app/");
         user = new HelperUser(wd);
         car = new HelperCar(wd);
+        search = new HelperSearch(wd);
 
+    }
+
+    public HelperSearch getSearch() {
+        return search;
     }
 
     public HelperCar getCar() {
